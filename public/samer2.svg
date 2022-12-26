@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 750px;
+        filter: url(#filter);
+        fill: #242024;
+        font-family: "HighVoltage Rough";
+      }
+    </style>
+    <filter id="filter" x="151" y="-13" width="305" height="632" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dx="3.109" dy="2.517" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="4.583"/>
+      <feFlood result="flood" flood-opacity="0.39"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feGaussianBlur result="blur-2" stdDeviation="5.333" in="SourceAlpha"/>
+      <feComposite result="composite-2"/>
+      <feComposite result="composite-3"/>
+      <feComposite result="composite-4"/>
+      <feFlood result="flood-2" flood-color="#bf91e9" flood-opacity="0.89"/>
+      <feComposite result="composite-5" operator="in" in2="composite-4"/>
+      <feBlend result="blend" in2="composite"/>
+      <feBlend result="blend-2" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <text id="S" class="cls-1" x="136.583" y="592.702">S</text>
+</svg>

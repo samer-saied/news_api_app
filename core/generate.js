@@ -3,8 +3,6 @@ const axios = require('axios');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-
-
 async function getDomDocument(pageNumber, countryName) {
     const uri = `https://www.alarabiya.net/${countryName}/archive?pageNo=${pageNumber}`
     const html = await axios.get(encodeURI(uri));
@@ -35,7 +33,7 @@ export async function getNews(pageNo, countryName) {
     }
     return {
         "data": news,
-        "current_page": `${pageNo} of 100 pages`,
+        "current_page": `${pageNo} of 1000 pages`,
         "total": news.length
     }
 }
