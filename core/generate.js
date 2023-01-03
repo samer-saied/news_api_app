@@ -1,14 +1,19 @@
 
-const axios = require('axios');
+// const axios = require('axios');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
 async function getDomDocument(pageNumber, countryName) {
-    const uri = `https://www.alarabiya.net/${countryName}/archive?pageNo=${pageNumber}`
-    const html = await axios.get(encodeURI(uri));
-    const dom = new JSDOM(html.data);
-    return dom.window.document
+    try {
+        const uri = `https://www.alarabiya.net/${countryName}/archive?pageNo=${pageNumber}`
+        const response = await fetch(encodeURI(uri));
+        const json = await response.text();
 
+        console.log(JSON.stringify(json)); const dom = new JSDOM(json);
+        return dom.window.document
+    } catch (error) {
+        console.log("ERROR-----" + error)
+    }
 }
 
 export async function getNews(pageNo, countryName) {
@@ -28,7 +33,7 @@ export async function getNews(pageNo, countryName) {
             "description": description,
             "image": image,
             "link": newsLink,
-            "topic":topic
+            "topic": topic
         })
     }
     return {
