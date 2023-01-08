@@ -1,18 +1,58 @@
 
-// const axios = require('axios');
+import "../core/strings"
+import stringData from "../core/strings";
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
 async function getDomDocument(pageNumber, countryName) {
     try {
-        const uri = `https://www.alarabiya.net/${countryName}/archive?pageNo=${pageNumber}`
+        const uri = `${stringData.alarbiyaMainUrl}/${countryName}/archive?pageNo=${pageNumber}`
+        console.log(uri)
         const response = await fetch(encodeURI(uri));
         const json = await response.text();
-
-        console.log(JSON.stringify(json)); const dom = new JSDOM(json);
+        const dom = new JSDOM(json);
         return dom.window.document
     } catch (error) {
         console.log("ERROR-----" + error)
+    }
+}
+
+async function getDomSingle(pageLink) {
+    try {
+        const uri = `${stringData.alarbiyaMainUrl}${pageLink}`
+        const response = await fetch(encodeURI(uri));
+        const json = await response.text();
+
+        const dom = new JSDOM(json);
+        return dom.window.document
+    } catch (error) {
+         console.log("ERROR-----" + error)
+    }
+}
+
+export async function getSingleNews(pageLink) {
+    try {
+        var des = ""
+         const page = await getDomSingle(pageLink)
+         var title= page.getElementsByClassName("headingInfo_title")[0].innerHTML.trim()
+         var location= page.getElementsByClassName("aa-geo-location")[0].nextElementSibling.innerHTML
+         var timeDate= page.getElementsByClassName("timeDate_element")[0].childNodes[0].nextSibling.innerHTML
+         var image= page.getElementsByClassName("image-wrapper")[0].querySelector("img").getAttribute('src')
+         var description= page.getElementsByClassName("paragraph")
+         for (let index = 0; index < description.length; index++) {
+            const element = description[index];
+            des += " /n " +element.textContent.trim()            
+         }
+
+        return {
+            "timeDate":timeDate,
+            "title":title,
+            "description":des,
+            "image": image,
+            "location":location
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -55,7 +95,10 @@ export function getCategories() {
         "arab-and-world/syria",
         "iran",
         "saudi-today",
-        "sport", "aswaq", "variety", "coronavirus"]
+        "sport",
+        "aswaq",
+        "variety",
+        "coronavirus"]
     return {
         "data": country,
         "total": country.length
