@@ -49,7 +49,7 @@ export async function getSingleNews(pageLink) {
             "title":title,
             "description":des,
             "image": image,
-            "location":location
+            "topic":location
         }
     } catch (error) {
         console.log(error)
