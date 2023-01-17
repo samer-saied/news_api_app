@@ -55,7 +55,7 @@ export async function getSingleNews(pageLink) {
         var description = page.getElementsByClassName("paragraph")
         for (let index = 0; index < description.length; index++) {
             const element = description[index];
-            des += " /n " + element.textContent.trim()
+            des += " \n " + element.textContent.trim()
         }
         return {
             "timeDate": timeDate,
