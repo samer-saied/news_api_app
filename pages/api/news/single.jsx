@@ -1,7 +1,7 @@
 import { getNews, getSingleNews } from '../../../core/generate'
 
 export default function handler(req, res) {
-    if (req.method == "GET") {
+    if (req.method == "POST") {
         var subject = req.body['subject']
         getSingleNews(subject).then((data) => {
             console.log(data)
