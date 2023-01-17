@@ -88,7 +88,8 @@ export async function getNews(pageNo, countryName) {
             "description": description,
             "image": image,
             "link": newsLink,
-            "topic": topic
+            "topic": topic,
+            "type":"image"
         })
     }
     return {
