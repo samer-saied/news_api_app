@@ -36,8 +36,7 @@ export async function getSingleNews(pageLink) {
     try {
         var des = ""
         const page = await getDomSingle(pageLink)
-        // var title = page.getElementsByClassName("headingInfo_title")[0].innerHTML
-        // console.log(title)
+        var title = page.getElementsByClassName("headingInfo_title")[0].innerHTML
         var location = page.getElementsByClassName("aa-geo-location")[0].nextElementSibling.innerHTML
         console.log(location)
         var timeDate = page.getElementsByClassName("timeDate_element")[0].childNodes[0].nextSibling.innerHTML
