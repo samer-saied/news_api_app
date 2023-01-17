@@ -59,7 +59,7 @@ export async function getSingleNews(pageLink) {
         }
         return {
             "timeDate": timeDate,
-            // "title": title,
+            "title": title,
             "description": des,
             "media": media,
             "type":type,
@@ -83,7 +83,7 @@ export async function getNews(pageNo, countryName) {
         const topic = element.getElementsByClassName('latest_section')[0].children[1].innerHTML
         // const newsLink = element.children[0].getAttribute('href')
         news.push({
-            "title": title.trim(),
+            "title": title.trim().replace("&nbsp;",""),
             "description": description,
             "image": image,
             "link": newsLink,
