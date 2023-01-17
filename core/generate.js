@@ -20,36 +20,51 @@ async function getDomDocument(pageNumber, countryName) {
 async function getDomSingle(pageLink) {
     try {
         const uri = `${stringData.alarbiyaMainUrl}${pageLink}`
+        console.log(uri)
         const response = await fetch(encodeURI(uri));
         const json = await response.text();
 
         const dom = new JSDOM(json);
         return dom.window.document
     } catch (error) {
-         console.log("ERROR-----" + error)
+        console.log("ERROR-----" + error)
     }
 }
 
 export async function getSingleNews(pageLink) {
+    console.log(pageLink)
     try {
         var des = ""
-         const page = await getDomSingle(pageLink)
-         var title= page.getElementsByClassName("headingInfo_title")[0].innerHTML.trim()
-         var location= page.getElementsByClassName("aa-geo-location")[0].nextElementSibling.innerHTML
-         var timeDate= page.getElementsByClassName("timeDate_element")[0].childNodes[0].nextSibling.innerHTML
-         var image= page.getElementsByClassName("image-wrapper")[0].querySelector("img").getAttribute('src')
-         var description= page.getElementsByClassName("paragraph")
-         for (let index = 0; index < description.length; index++) {
+        const page = await getDomSingle(pageLink)
+        // var title = page.getElementsByClassName("headingInfo_title")[0].innerHTML
+        // console.log(title)
+        var location = page.getElementsByClassName("aa-geo-location")[0].nextElementSibling.innerHTML
+        console.log(location)
+        var timeDate = page.getElementsByClassName("timeDate_element")[0].childNodes[0].nextSibling.innerHTML
+        console.log(timeDate)
+        var media = ""
+        var type = ""
+       var isExistedImage = page.getElementsByClassName("image-wrapper")[0].querySelector("img")
+       if(isExistedImage != undefined){
+        var media = isExistedImage.getAttribute('src')
+        type = "image"
+       }else{
+        var media = page.querySelector("video-js").childNodes[3].getAttribute('src');
+        type = "video"
+       }           
+    
+        var description = page.getElementsByClassName("paragraph")
+        for (let index = 0; index < description.length; index++) {
             const element = description[index];
-            des += " /n " +element.textContent.trim()            
-         }
-
+            des += " /n " + element.textContent.trim()
+        }
         return {
-            "timeDate":timeDate,
-            "title":title,
-            "description":des,
-            "image": image,
-            "topic":location
+            "timeDate": timeDate,
+            // "title": title,
+            "description": des,
+            "media": media,
+            "type":type,
+            "topic": location
         }
     } catch (error) {
         console.log(error)
