@@ -85,7 +85,7 @@ export async function getNews(pageNo, countryName) {
         news.push({
             "title": title.replace("&nbsp;","").trim(),
             "description": description,
-            "image": image,
+            "media": image,
             "link": newsLink,
             "topic": topic,
             "type":"image"
