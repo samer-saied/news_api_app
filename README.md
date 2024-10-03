@@ -10,5 +10,4 @@
 
 
 Created By Samer Saied
-[[https://samersaied.vercel.app
-](https://samer-saied.vercel.app/)](https://samer-saied.vercel.app/)
+https://samer-saied.vercel.app/
